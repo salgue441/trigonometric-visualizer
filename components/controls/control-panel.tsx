@@ -132,7 +132,7 @@ export function ControlPanel({
             {/* Function Selector */}
             <FunctionSelector
               selectedFunction={selectedFunction}
-              functions={PREDEFINED_FUNCTIONS.slice(0, 8)}
+              functions={PREDEFINED_FUNCTIONS}
               onFunctionSelect={onFunctionSelect}
             />
 

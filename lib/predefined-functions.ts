@@ -8,7 +8,7 @@
  * @version 1.0.0
  */
 
-import type { TrigFunction, ColorMode } from "@/types";
+import type { TrigFunction, ColorMode } from "@/types"
 
 /**
  * Collection of predefined mathematical functions for art generation
@@ -318,13 +318,123 @@ export const PREDEFINED_FUNCTIONS: TrigFunction[] = [
     lineWidth: 1.2,
     trailOpacity: 0.998,
   },
-];
+  {
+    id: "mobius-strip",
+    name: "Möbius Strip",
+    description:
+      "One-sided surface with a half-twist, creating a continuous loop",
+    xEquation:
+      "150 * cos(t + time * 0.5) * (1 + 0.5 * cos(t * 0.5 + time * 0.3))",
+    yEquation:
+      "150 * sin(t + time * 0.5) * (1 + 0.5 * cos(t * 0.5 + time * 0.3))",
+    colorMode: "spectrum",
+    animationSpeed: 0.7,
+    complexity: 2500,
+    lineWidth: 1.5,
+    trailOpacity: 0.97,
+  },
+  {
+    id: "klein-bottle",
+    name: "Klein Bottle",
+    description:
+      "Non-orientable surface with no boundary, a 4D object projected into 2D",
+    xEquation:
+      "120 * (cos(t + time) * (1 + sin(t * 0.5 + time * 0.2)) + cos(t * 2 + time * 0.5) * 0.5)",
+    yEquation:
+      "120 * (sin(t + time) * (1 + sin(t * 0.5 + time * 0.2)) + sin(t * 3 + time * 0.7) * 0.3)",
+    colorMode: "plasma",
+    animationSpeed: 0.6,
+    complexity: 3500,
+    lineWidth: 1.3,
+    trailOpacity: 0.98,
+  },
+  {
+    id: "heart-curve",
+    name: "Heart Curve",
+    description: "Mathematical heart shape with pulsing animation",
+    xEquation: "160 * pow(sin(t + time), 3)",
+    yEquation:
+      "130 * cos(t + time * 0.8) - 50 * cos(2 * (t + time)) - 20 * cos(3 * (t + time)) - 10 * cos(4 * (t + time))",
+    colorMode: "fire",
+    animationSpeed: 1.2,
+    complexity: 2000,
+    lineWidth: 2.0,
+    trailOpacity: 0.95,
+  },
+  {
+    id: "torus-knot",
+    name: "Torus Knot",
+    description:
+      "Knot drawn on the surface of a torus with p,q winding numbers",
+    xEquation: "(100 + 40 * cos(3 * t + time * 0.5)) * cos(2 * t + time)",
+    yEquation: "(100 + 40 * cos(3 * t + time * 0.5)) * sin(2 * t + time)",
+    colorMode: "neon",
+    animationSpeed: 0.9,
+    complexity: 3000,
+    lineWidth: 1.4,
+    trailOpacity: 0.96,
+  },
+  {
+    id: "harmonic-oscillator",
+    name: "Harmonic Oscillator",
+    description: "Damped harmonic motion with multiple coupled oscillators",
+    xEquation: "200 * exp(-t * 0.001) * sin(3 * t + time) * cos(t * 0.2)",
+    yEquation: "200 * exp(-t * 0.001) * cos(2 * t + time * 0.7) * sin(t * 0.3)",
+    colorMode: "ocean",
+    animationSpeed: 1.1,
+    complexity: 2800,
+    lineWidth: 1.2,
+    trailOpacity: 0.99,
+  },
+  {
+    id: "particle-collider",
+    name: "Particle Collider",
+    description: "High-energy particle collisions with decay patterns",
+    xEquation:
+      "150 * tanh(sin(2 * t + time)) + 80 * sin(7 * t + time * 2) * exp(-t * 0.0003)",
+    yEquation:
+      "150 * tanh(cos(3 * t + time * 0.7)) + 80 * cos(5 * t + time * 1.5) * exp(-t * 0.0003)",
+    colorMode: "plasma",
+    animationSpeed: 2.0,
+    complexity: 4500,
+    lineWidth: 1.6,
+    trailOpacity: 0.94,
+  },
+  {
+    id: "vortex-field",
+    name: "Vortex Field",
+    description: "Swirling fluid dynamics with multiple interacting vortices",
+    xEquation:
+      "140 * cos(t + time) + 90 * sin(t * 2 + time * 0.5) / (1 + 0.5 * abs(sin(t * 0.2)))",
+    yEquation:
+      "140 * sin(t + time) + 90 * cos(t * 3 + time * 0.3) / (1 + 0.5 * abs(cos(t * 0.3)))",
+    colorMode: "ocean",
+    animationSpeed: 1.3,
+    complexity: 3200,
+    lineWidth: 1.5,
+    trailOpacity: 0.97,
+  },
+  {
+    id: "quantum-entanglement",
+    name: "Quantum Entanglement",
+    description: "Correlated quantum states with non-local connections",
+    xEquation:
+      "170 * sin(t + time) * (1 + 0.3 * sin(t * 7 + time * 2) * sin(t * 13 + time * 0.7))",
+    yEquation:
+      "170 * cos(t + time * 0.8) * (1 + 0.3 * cos(t * 5 + time * 1.5) * cos(t * 11 + time * 0.4))",
+    colorMode: "neon",
+    animationSpeed: 1.8,
+    complexity: 5000,
+    lineWidth: 1.2,
+    trailOpacity: 0.98,
+  },
+]
 
 /**
  * Gets a predefined function by ID with error handling
  *
- * @description Safely retrieves a predefined function with fallback to the first function
- * if the requested ID doesn't exist
+ * @description Safely retrieves a predefined function with fallback to the
+ * first function if the requested ID doesn't exist
  *
  * @param id - The function ID to retrieve
  * @returns The requested function or the first function as fallback
@@ -339,7 +449,7 @@ export function getPredefinedFunction(id: string): TrigFunction {
   return (
     PREDEFINED_FUNCTIONS.find((func) => func.id === id) ||
     PREDEFINED_FUNCTIONS[0]
-  );
+  )
 }
 
 /**
@@ -357,7 +467,7 @@ export function getPredefinedFunction(id: string): TrigFunction {
  * ```
  */
 export function getPredefinedFunctionIds(): string[] {
-  return PREDEFINED_FUNCTIONS.map((func) => func.id);
+  return PREDEFINED_FUNCTIONS.map((func) => func.id)
 }
 
 /**
@@ -375,7 +485,7 @@ export function getPredefinedFunctionIds(): string[] {
  * ```
  */
 export function getFunctionsByColorMode(colorMode: ColorMode): TrigFunction[] {
-  return PREDEFINED_FUNCTIONS.filter((func) => func.colorMode === colorMode);
+  return PREDEFINED_FUNCTIONS.filter((func) => func.colorMode === colorMode)
 }
 
 /**
@@ -396,12 +506,12 @@ export function getFunctionsByColorMode(colorMode: ColorMode): TrigFunction[] {
  */
 export function getFunctionsByComplexity(
   minComplexity: number,
-  maxComplexity: number,
+  maxComplexity: number
 ): TrigFunction[] {
   return PREDEFINED_FUNCTIONS.filter(
     (func) =>
-      func.complexity >= minComplexity && func.complexity <= maxComplexity,
-  );
+      func.complexity >= minComplexity && func.complexity <= maxComplexity
+  )
 }
 
 /**
@@ -422,12 +532,11 @@ export function getFunctionsByComplexity(
  */
 export function getFunctionsBySpeed(
   minSpeed: number,
-  maxSpeed: number,
+  maxSpeed: number
 ): TrigFunction[] {
   return PREDEFINED_FUNCTIONS.filter(
-    (func) =>
-      func.animationSpeed >= minSpeed && func.animationSpeed <= maxSpeed,
-  );
+    (func) => func.animationSpeed >= minSpeed && func.animationSpeed <= maxSpeed
+  )
 }
 
 /**
@@ -447,46 +556,44 @@ export function getFunctionsBySpeed(
  */
 export function getRandomFunction(
   options: {
-    colorMode?: ColorMode;
-    minComplexity?: number;
-    maxComplexity?: number;
-    minSpeed?: number;
-    maxSpeed?: number;
-  } = {},
+    colorMode?: ColorMode
+    minComplexity?: number
+    maxComplexity?: number
+    minSpeed?: number
+    maxSpeed?: number
+  } = {}
 ): TrigFunction {
-  let functions = PREDEFINED_FUNCTIONS;
+  let functions = PREDEFINED_FUNCTIONS
 
   if (options.colorMode) {
-    functions = functions.filter(
-      (func) => func.colorMode === options.colorMode,
-    );
+    functions = functions.filter((func) => func.colorMode === options.colorMode)
   }
 
   if (
     options.minComplexity !== undefined ||
     options.maxComplexity !== undefined
   ) {
-    const min = options.minComplexity ?? 0;
-    const max = options.maxComplexity ?? Infinity;
+    const min = options.minComplexity ?? 0
+    const max = options.maxComplexity ?? Infinity
     functions = functions.filter(
-      (func) => func.complexity >= min && func.complexity <= max,
-    );
+      (func) => func.complexity >= min && func.complexity <= max
+    )
   }
 
   if (options.minSpeed !== undefined || options.maxSpeed !== undefined) {
-    const min = options.minSpeed ?? 0;
-    const max = options.maxSpeed ?? Infinity;
+    const min = options.minSpeed ?? 0
+    const max = options.maxSpeed ?? Infinity
     functions = functions.filter(
-      (func) => func.animationSpeed >= min && func.animationSpeed <= max,
-    );
+      (func) => func.animationSpeed >= min && func.animationSpeed <= max
+    )
   }
 
   if (functions.length === 0) {
-    return PREDEFINED_FUNCTIONS[0];
+    return PREDEFINED_FUNCTIONS[0]
   }
 
-  const randomIndex = Math.floor(Math.random() * functions.length);
-  return functions[randomIndex];
+  const randomIndex = Math.floor(Math.random() * functions.length)
+  return functions[randomIndex]
 }
 
 /**
@@ -508,52 +615,52 @@ export function getRandomFunction(
  */
 export function createFunctionPlaylist(
   options: {
-    sortBy?: "complexity" | "speed" | "name" | "random";
-    maxFunctions?: number;
-    excludeIds?: string[];
-    includeOnlyColorModes?: ColorMode[];
-  } = {},
+    sortBy?: "complexity" | "speed" | "name" | "random"
+    maxFunctions?: number
+    excludeIds?: string[]
+    includeOnlyColorModes?: ColorMode[]
+  } = {}
 ): TrigFunction[] {
-  let functions = [...PREDEFINED_FUNCTIONS];
+  let functions = [...PREDEFINED_FUNCTIONS]
   if (options.excludeIds) {
     functions = functions.filter(
-      (func) => !options.excludeIds!.includes(func.id),
-    );
+      (func) => !options.excludeIds!.includes(func.id)
+    )
   }
 
   if (options.includeOnlyColorModes) {
     functions = functions.filter((func) =>
-      options.includeOnlyColorModes!.includes(func.colorMode),
-    );
+      options.includeOnlyColorModes!.includes(func.colorMode)
+    )
   }
 
   switch (options.sortBy) {
     case "complexity":
-      functions.sort((a, b) => a.complexity - b.complexity);
-      break;
+      functions.sort((a, b) => a.complexity - b.complexity)
+      break
 
     case "speed":
-      functions.sort((a, b) => a.animationSpeed - b.animationSpeed);
-      break;
+      functions.sort((a, b) => a.animationSpeed - b.animationSpeed)
+      break
 
     case "name":
-      functions.sort((a, b) => a.name.localeCompare(b.name));
-      break;
+      functions.sort((a, b) => a.name.localeCompare(b.name))
+      break
 
     case "random":
       for (let i = functions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [functions[i], functions[j]] = [functions[j], functions[i]];
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[functions[i], functions[j]] = [functions[j], functions[i]]
       }
 
-      break;
+      break
   }
 
   if (options.maxFunctions && options.maxFunctions > 0) {
-    functions = functions.slice(0, options.maxFunctions);
+    functions = functions.slice(0, options.maxFunctions)
   }
 
-  return functions;
+  return functions
 }
 
 /**
@@ -574,41 +681,41 @@ export function createFunctionPlaylist(
  * ```
  */
 export function validateFunction(func: Partial<TrigFunction>): {
-  isValid: boolean;
-  errors: string[];
-  warnings: string[];
+  isValid: boolean
+  errors: string[]
+  warnings: string[]
 } {
-  const errors: string[] = [];
-  const warnings: string[] = [];
+  const errors: string[] = []
+  const warnings: string[] = []
 
-  if (!func.id) errors.push("Function ID is required");
-  if (!func.name) errors.push("Function name is required");
-  if (!func.description) errors.push("Function description is required");
-  if (!func.xEquation) errors.push("X equation is required");
-  if (!func.yEquation) errors.push("Y equation is required");
-  if (!func.colorMode) errors.push("Color mode is required");
+  if (!func.id) errors.push("Function ID is required")
+  if (!func.name) errors.push("Function name is required")
+  if (!func.description) errors.push("Function description is required")
+  if (!func.xEquation) errors.push("X equation is required")
+  if (!func.yEquation) errors.push("Y equation is required")
+  if (!func.colorMode) errors.push("Color mode is required")
 
   if (func.animationSpeed !== undefined) {
     if (func.animationSpeed <= 0 || func.animationSpeed > 5) {
-      errors.push("Animation speed must be between 0 and 5");
+      errors.push("Animation speed must be between 0 and 5")
     }
   }
 
   if (func.complexity !== undefined) {
     if (func.complexity < 100 || func.complexity > 10000) {
-      warnings.push("Complexity should typically be between 100 and 10000");
+      warnings.push("Complexity should typically be between 100 and 10000")
     }
   }
 
   if (func.lineWidth !== undefined) {
     if (func.lineWidth < 0.5 || func.lineWidth > 5) {
-      warnings.push("Line width should typically be between 0.5 and 5");
+      warnings.push("Line width should typically be between 0.5 and 5")
     }
   }
 
   if (func.trailOpacity !== undefined) {
     if (func.trailOpacity < 0.8 || func.trailOpacity > 1) {
-      warnings.push("Trail opacity should typically be between 0.8 and 1");
+      warnings.push("Trail opacity should typically be between 0.8 and 1")
     }
   }
 
@@ -616,14 +723,14 @@ export function validateFunction(func: Partial<TrigFunction>): {
     func.id &&
     PREDEFINED_FUNCTIONS.some((existing) => existing.id === func.id)
   ) {
-    errors.push(`Function ID '${func.id}' already exists`);
+    errors.push(`Function ID '${func.id}' already exists`)
   }
 
   return {
     isValid: errors.length === 0,
     errors,
     warnings,
-  };
+  }
 }
 
 /**
@@ -641,41 +748,41 @@ export function validateFunction(func: Partial<TrigFunction>): {
  * ```
  */
 export function getFunctionStatistics(): {
-  totalFunctions: number;
-  colorModeDistribution: Record<ColorMode, number>;
-  complexityRange: { min: number; max: number; average: number };
-  speedRange: { min: number; max: number; average: number };
-  averageLineWidth: number;
-  averageTrailOpacity: number;
+  totalFunctions: number
+  colorModeDistribution: Record<ColorMode, number>
+  complexityRange: { min: number; max: number; average: number }
+  speedRange: { min: number; max: number; average: number }
+  averageLineWidth: number
+  averageTrailOpacity: number
 } {
-  const functions = PREDEFINED_FUNCTIONS;
+  const functions = PREDEFINED_FUNCTIONS
   const colorModeDistribution = functions.reduce(
     (acc, func) => {
-      acc[func.colorMode] = (acc[func.colorMode] || 0) + 1;
-      return acc;
+      acc[func.colorMode] = (acc[func.colorMode] || 0) + 1
+      return acc
     },
-    {} as Record<ColorMode, number>,
-  );
+    {} as Record<ColorMode, number>
+  )
 
-  const complexities = functions.map((func) => func.complexity);
+  const complexities = functions.map((func) => func.complexity)
   const complexityRange = {
     min: Math.min(...complexities),
     max: Math.max(...complexities),
     average: complexities.reduce((a, b) => a + b) / complexities.length,
-  };
+  }
 
-  const speeds = functions.map((func) => func.animationSpeed);
+  const speeds = functions.map((func) => func.animationSpeed)
   const speedRange = {
     min: Math.min(...speeds),
     max: Math.max(...speeds),
     average: speeds.reduce((a, b) => a + b) / speeds.length,
-  };
+  }
 
   const averageLineWidth =
-    functions.reduce((sum, func) => sum + func.lineWidth, 0) / functions.length;
+    functions.reduce((sum, func) => sum + func.lineWidth, 0) / functions.length
   const averageTrailOpacity =
     functions.reduce((sum, func) => sum + func.trailOpacity, 0) /
-    functions.length;
+    functions.length
 
   return {
     totalFunctions: functions.length,
@@ -684,5 +791,5 @@ export function getFunctionStatistics(): {
     speedRange,
     averageLineWidth,
     averageTrailOpacity,
-  };
+  }
 }
