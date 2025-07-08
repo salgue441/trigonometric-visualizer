@@ -61,6 +61,9 @@ interface ControlPanelProps {
   onAnimationSpeedChange: (value: number) => void
   onComplexityChange: (value: number) => void
   onColorModeChange: (value: ColorMode) => void
+
+  /** Close handler for mobile */
+  onClose: () => void
 }
 
 /**
@@ -87,8 +90,12 @@ export function ControlPanel({
   onAnimationSpeedChange,
   onComplexityChange,
   onColorModeChange,
+  onClose,
 }: ControlPanelProps): React.JSX.Element | null {
   if (isFullscreen) return null
+  const handleClose = () => {
+    onClose?.()
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -117,9 +124,7 @@ export function ControlPanel({
           {/* Mobile close button */}
           <div className="lg:hidden flex justify-end mb-2">
             <button
-              onClick={() => {
-                // Does not do nothing
-              }}
+              onClick={handleClose}
               className="p-2 text-white/60 hover:text-white transition-colors"
               aria-label="Close control panel"
             >

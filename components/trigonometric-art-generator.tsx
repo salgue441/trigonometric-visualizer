@@ -519,6 +519,7 @@ export function TrigonometricArtGenerator(): React.JSX.Element {
           onAnimationSpeedChange={handleAnimationSpeedChange}
           onComplexityChange={handleComplexityChange}
           onColorModeChange={handleColorModeChange}
+          onClose={toggleControls}
         />
 
         {/* Canvas Area */}
