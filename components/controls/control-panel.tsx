@@ -88,7 +88,6 @@ export function ControlPanel({
   onComplexityChange,
   onColorModeChange,
 }: ControlPanelProps): React.JSX.Element | null {
-  // Don't render in fullscreen mode
   if (isFullscreen) return null
 
   return (
