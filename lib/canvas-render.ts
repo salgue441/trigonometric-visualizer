@@ -86,8 +86,6 @@ export class CanvasRenderer {
 
   // Performance monitoring
   private frameTimestamps: number[] = []
-  private lastFrameTime = 0
-  private frameCount = 0
 
   // Adaptive quality management
   private qualityScaleFactor = 1.0
@@ -305,7 +303,6 @@ export class CanvasRenderer {
    */
   private setupPerformanceMonitoring(): void {
     this.frameTimestamps = []
-    this.lastFrameTime = getHighPrecisionTime()
     this.checkPerformance = throttle(this.checkPerformance.bind(this), 500)
   }
 
