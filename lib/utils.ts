@@ -298,7 +298,7 @@ export function randomInt(min: number, max: number): number {
  * @performance Maintains minimal memory overhead with single timeout
  * @threadSafety Safe for concurrent calls, cancels previous timeouts
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: never[]) => unknown>(
   func: T,
   delay: number,
   options: { leading?: boolean; trailing?: boolean } = {}
@@ -371,7 +371,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @performance Optimized for high-frequency calls with minimal overhead
  * @accuracy Uses high-precision timestamps for consistent timing
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: never[]) => unknown>(
   func: T,
   delay: number,
   options: { leading?: boolean; trailing?: boolean } = {}
@@ -395,15 +395,18 @@ export function throttle<T extends (...args: any[]) => any>(
     if (trailing && !timeoutId) {
       const remainingTime = delay - (currentTime - lastCallTime)
 
-      timeoutId = setTimeout(() => {
-        lastCallTime = getHighPrecisionTime()
+      timeoutId = setTimeout(
+        () => {
+          lastCallTime = getHighPrecisionTime()
 
-        if (lastArgs) {
-          func(...lastArgs)
-        }
+          if (lastArgs) {
+            func(...lastArgs)
+          }
 
-        timeoutId = null
-      }, Math.max(0, remainingTime))
+          timeoutId = null
+        },
+        Math.max(0, remainingTime)
+      )
     }
   }
 
@@ -623,7 +626,7 @@ export function formatNumber(
     const formatter = new Intl.NumberFormat(locale, {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
-      notation: notation as any,
+      notation: notation as Intl.NumberFormatOptions["notation"],
     })
 
     const formatted = formatter.format(value)
@@ -693,8 +696,8 @@ export function formatBytes(
           "Petabytes",
         ]
     : binary
-    ? ["B", "KiB", "MiB", "GiB", "TiB", "PiB"]
-    : ["B", "kB", "MB", "GB", "TB", "PB"]
+      ? ["B", "KiB", "MiB", "GiB", "TiB", "PiB"]
+      : ["B", "kB", "MB", "GB", "TB", "PB"]
 
   const exponent = Math.floor(Math.log(Math.abs(bytes)) / Math.log(base))
   const unitIndex = Math.min(exponent, units.length - 1)
@@ -773,7 +776,7 @@ export function delay<T = void>(ms: number, value?: T): Promise<T> {
 export function safeJsonParse<T>(
   json: string,
   fallback: T,
-  validator?: (data: any) => data is T
+  validator?: (data: unknown) => data is T
 ): T {
   try {
     const parsed = JSON.parse(json)
@@ -1110,35 +1113,35 @@ export function deepClone<T>(obj: T, seen = new WeakMap()): T {
     return obj
   }
 
-  if (seen.has(obj as any)) {
-    return seen.get(obj as any)
+  if (seen.has(obj)) {
+    return seen.get(obj) as T
   }
 
   if (obj instanceof Date) {
-    return new Date(obj.getTime()) as any
+    return new Date(obj.getTime()) as unknown as T
   }
 
   if (obj instanceof RegExp) {
-    return new RegExp(obj.source, obj.flags) as any
+    return new RegExp(obj.source, obj.flags) as unknown as T
   }
 
   if (Array.isArray(obj)) {
-    const cloned: any[] = []
-    seen.set(obj as any, cloned)
+    const cloned: unknown[] = []
+    seen.set(obj, cloned)
 
     for (let i = 0; i < obj.length; i++) {
       cloned[i] = deepClone(obj[i], seen)
     }
 
-    return cloned as any
+    return cloned as unknown as T
   }
 
   const cloned = Object.create(Object.getPrototypeOf(obj))
-  seen.set(obj as any, cloned)
+  seen.set(obj, cloned)
 
   for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      cloned[key] = deepClone((obj as any)[key], seen)
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      cloned[key] = deepClone((obj as Record<string, unknown>)[key], seen)
     }
   }
 

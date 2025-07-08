@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-import type { ColorScheme, ColorMode } from "@/types"
+import type { ColorScheme, ColorMode } from "@/types";
 
 /**
  * Advanced color schemes with dynamic color generation and math precision.
@@ -27,14 +27,14 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   spectrum: {
     name: "Spectrum",
     getColor: (t: number, alpha: number, time: number) => {
-      const baseHue = (t * 360 + time * 20) % 360
-      const hueVariation = Math.sin(time * 0.5 + t * Math.PI * 3) * 30
-      const hue = (baseHue + hueVariation + 360) % 360
+      const baseHue = (t * 360 + time * 20) % 360;
+      const hueVariation = Math.sin(time * 0.5 + t * Math.PI * 3) * 30;
+      const hue = (baseHue + hueVariation + 360) % 360;
 
-      const saturation = 85 + Math.sin(time + t * Math.PI * 2) * 15
-      const lightness = 55 + Math.sin(time * 1.5 + t * Math.PI * 4) * 25
+      const saturation = 85 + Math.sin(time + t * Math.PI * 2) * 15;
+      const lightness = 55 + Math.sin(time * 1.5 + t * Math.PI * 4) * 25;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
     },
     gradientStops: [
       "#ff0000",
@@ -60,18 +60,18 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
    */ plasma: {
     name: "Plasma",
     getColor: (t: number, alpha: number, time: number) => {
-      const baseHue = 280
-      const hueRange = 120
-      const hueOffset = Math.sin(time * 0.8 + t * Math.PI) * 60
-      const hue = baseHue + t * hueRange + hueOffset
+      const baseHue = 280;
+      const hueRange = 120;
+      const hueOffset = Math.sin(time * 0.8 + t * Math.PI) * 60;
+      const hue = baseHue + t * hueRange + hueOffset;
 
-      const saturation = 90 + Math.cos(time * 2 + t * Math.PI * 3) * 10
-      const lightness = 50 + Math.sin(time * 1.2 + t * Math.PI * 5) * 30
-      const brightness = 1 + Math.sin(time * 3 + t * Math.PI * 7) * 0.3
+      const saturation = 90 + Math.cos(time * 2 + t * Math.PI * 3) * 10;
+      const lightness = 50 + Math.sin(time * 1.2 + t * Math.PI * 5) * 30;
+      const brightness = 1 + Math.sin(time * 3 + t * Math.PI * 7) * 0.3;
 
       return `hsla(${hue}, ${saturation}%, ${
         lightness * brightness
-      }%, ${alpha})`
+      }%, ${alpha})`;
     },
     gradientStops: ["#ff00ff", "#dd00ff", "#bb44ff", "#9966ff", "#7788ff"],
     supportsHDR: true,
@@ -86,15 +86,15 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   fire: {
     name: "Fire",
     getColor: (t: number, alpha: number, time: number) => {
-      const baseHue = 15
-      const hueVariation = t * 45 + Math.sin(time * 2 + t * Math.PI * 2) * 25
-      const hue = Math.max(0, Math.min(60, baseHue + hueVariation))
+      const baseHue = 15;
+      const hueVariation = t * 45 + Math.sin(time * 2 + t * Math.PI * 2) * 25;
+      const hue = Math.max(0, Math.min(60, baseHue + hueVariation));
 
-      const saturation = 95 + Math.cos(time * 1.5 + t * Math.PI) * 5
-      const lightness = 40 + t * 40 + Math.sin(time * 3 + t * Math.PI * 6) * 20
-      const flicker = 1 + Math.sin(time * 8 + t * Math.PI * 12) * 0.2
+      const saturation = 95 + Math.cos(time * 1.5 + t * Math.PI) * 5;
+      const lightness = 40 + t * 40 + Math.sin(time * 3 + t * Math.PI * 6) * 20;
+      const flicker = 1 + Math.sin(time * 8 + t * Math.PI * 12) * 0.2;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness * flicker}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness * flicker}%, ${alpha})`;
     },
     gradientStops: [
       "#ff4400",
@@ -116,18 +116,18 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   ocean: {
     name: "Ocean",
     getColor: (t: number, alpha: number, time: number) => {
-      const baseHue = 195
-      const hueRange = 120
-      const depthFactor = Math.sin(t * Math.PI)
-      const waveMotion = Math.sin(time * 0.6 + t * Math.PI * 2) * 40
-      const hue = baseHue + t * hueRange + waveMotion
+      const baseHue = 195;
+      const hueRange = 120;
+      const depthFactor = Math.sin(t * Math.PI);
+      const waveMotion = Math.sin(time * 0.6 + t * Math.PI * 2) * 40;
+      const hue = baseHue + t * hueRange + waveMotion;
 
-      const saturation = 70 + Math.sin(time * 1.8 + t * Math.PI * 2) * 25
+      const saturation = 70 + Math.sin(time * 1.8 + t * Math.PI * 2) * 25;
       const lightness =
-        30 + depthFactor * 40 + Math.cos(time + t * Math.PI * 4) * 20
-      const ripple = 1 + Math.sin(time * 4 + t * Math.PI * 8) * 0.15
+        30 + depthFactor * 40 + Math.cos(time + t * Math.PI * 4) * 20;
+      const ripple = 1 + Math.sin(time * 4 + t * Math.PI * 8) * 0.15;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness * ripple}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness * ripple}%, ${alpha})`;
     },
     gradientStops: [
       "#004466",
@@ -149,18 +149,18 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   galaxy: {
     name: "Galaxy",
     getColor: (t: number, alpha: number, time: number) => {
-      const baseHue = 240
-      const hueRange = 180
-      const cosmicDrift = Math.sin(time * 0.3 + t * Math.PI * 0.5) * 90
-      const stellarPulse = Math.sin(time * 2 + t * Math.PI * 6) * 30
-      const hue = baseHue + t * hueRange + cosmicDrift + stellarPulse
+      const baseHue = 240;
+      const hueRange = 180;
+      const cosmicDrift = Math.sin(time * 0.3 + t * Math.PI * 0.5) * 90;
+      const stellarPulse = Math.sin(time * 2 + t * Math.PI * 6) * 30;
+      const hue = baseHue + t * hueRange + cosmicDrift + stellarPulse;
 
-      const saturation = 80 + Math.cos(time * 1.2 + t * Math.PI * 2) * 20
-      const baseLightness = 25 + t * 50
-      const starField = Math.sin(time * 5 + t * Math.PI * 15) * 15
-      const lightness = baseLightness + starField
+      const saturation = 80 + Math.cos(time * 1.2 + t * Math.PI * 2) * 20;
+      const baseLightness = 25 + t * 50;
+      const starField = Math.sin(time * 5 + t * Math.PI * 15) * 15;
+      const lightness = baseLightness + starField;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
     },
     gradientStops: [
       "#1a0033",
@@ -182,18 +182,18 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   neon: {
     name: "Neon",
     getColor: (t: number, alpha: number, time: number) => {
-      const hueSpeed = 60
-      const baseHue = (t * 300 + time * hueSpeed) % 360
-      const electricPulse = Math.sin(time * 4 + t * Math.PI * 8) * 45
-      const hue = (baseHue + electricPulse + 360) % 360
+      const hueSpeed = 60;
+      const baseHue = (t * 300 + time * hueSpeed) % 360;
+      const electricPulse = Math.sin(time * 4 + t * Math.PI * 8) * 45;
+      const hue = (baseHue + electricPulse + 360) % 360;
 
-      const saturation = 100
-      const baseLightness = 60
-      const strobeEffect = Math.sin(time * 6 + t * Math.PI * 12) * 25
-      const lightness = baseLightness + strobeEffect
-      const glow = 1 + Math.sin(time * 8 + t * Math.PI * 16) * 0.4
+      const saturation = 100;
+      const baseLightness = 60;
+      const strobeEffect = Math.sin(time * 6 + t * Math.PI * 12) * 25;
+      const lightness = baseLightness + strobeEffect;
+      const glow = 1 + Math.sin(time * 8 + t * Math.PI * 16) * 0.4;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness * glow}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness * glow}%, ${alpha})`;
     },
     gradientStops: [
       "#ff0080",
@@ -217,21 +217,21 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
   aurora: {
     name: "Aurora",
     getColor: (t: number, alpha: number, time: number) => {
-      const primaryHue = 140
-      const secondaryHue = 240
-      const hueBlend = Math.sin(t * Math.PI) * 0.5 + 0.5
-      const timeShift = Math.sin(time * 0.4 + t * Math.PI) * 60
+      const primaryHue = 140;
+      const secondaryHue = 240;
+      const hueBlend = Math.sin(t * Math.PI) * 0.5 + 0.5;
+      const timeShift = Math.sin(time * 0.4 + t * Math.PI) * 60;
       const hue =
-        primaryHue + hueBlend * (secondaryHue - primaryHue) + timeShift
+        primaryHue + hueBlend * (secondaryHue - primaryHue) + timeShift;
 
-      const saturation = 60 + Math.sin(time * 1.5 + t * Math.PI * 3) * 30
+      const saturation = 60 + Math.sin(time * 1.5 + t * Math.PI * 3) * 30;
       const lightness =
         45 +
         Math.sin(t * Math.PI * 2) * 25 +
-        Math.cos(time * 2 + t * Math.PI * 4) * 15
-      const shimmer = 1 + Math.sin(time * 3 + t * Math.PI * 9) * 0.25
+        Math.cos(time * 2 + t * Math.PI * 4) * 15;
+      const shimmer = 1 + Math.sin(time * 3 + t * Math.PI * 9) * 0.25;
 
-      return `hsla(${hue}, ${saturation}%, ${lightness * shimmer}%, ${alpha})`
+      return `hsla(${hue}, ${saturation}%, ${lightness * shimmer}%, ${alpha})`;
     },
     gradientStops: [
       "#00ff88",
@@ -243,7 +243,7 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
     ],
     supportsHDR: false,
   },
-}
+};
 
 /**
  * Gets a color scheme by name with fallback handling
@@ -261,7 +261,7 @@ export const COLOR_SCHEMES: Record<ColorMode, ColorScheme> = {
  * ```
  */
 export function getColorScheme(colorMode: ColorMode): ColorScheme {
-  return COLOR_SCHEMES[colorMode] || COLOR_SCHEMES.spectrum
+  return COLOR_SCHEMES[colorMode] || COLOR_SCHEMES.spectrum;
 }
 
 /**
@@ -273,7 +273,7 @@ export function getColorScheme(colorMode: ColorMode): ColorScheme {
  * @returns Array of color mode names
  */
 export function getAvailableColorModes(): ColorMode[] {
-  return Object.keys(COLOR_SCHEMES) as ColorMode[]
+  return Object.keys(COLOR_SCHEMES) as ColorMode[];
 }
 
 /**
@@ -286,7 +286,7 @@ export function getAvailableColorModes(): ColorMode[] {
  * @returns Whether the color mode is valid
  */
 export function isValidColorMode(colorMode: string): colorMode is ColorMode {
-  return colorMode in COLOR_SCHEMES
+  return colorMode in COLOR_SCHEMES;
 }
 
 /**
@@ -313,9 +313,9 @@ export function createCustomColorScheme(
   name: string,
   colorFunction: (t: number, alpha: number, time: number) => string,
   options: {
-    gradientStops?: string[]
-    supportsHDR?: boolean
-  } = {}
+    gradientStops?: string[];
+    supportsHDR?: boolean;
+  } = {},
 ): ColorScheme {
   return {
     name,
@@ -323,7 +323,7 @@ export function createCustomColorScheme(
     gradientStops: options.gradientStops ?? [],
     supportsHDR:
       options.supportsHDR !== undefined ? options.supportsHDR : false,
-  }
+  };
 }
 
 /**
@@ -340,22 +340,22 @@ export function createCustomColorScheme(
 export function blendColorSchemes(
   scheme1: ColorScheme,
   scheme2: ColorScheme,
-  blendFactor: number
+  blendFactor: number,
 ): ColorScheme {
-  const clampedBlend = Math.max(0, Math.min(1, blendFactor))
+  const clampedBlend = Math.max(0, Math.min(1, blendFactor));
 
   return {
     name: `${scheme1.name} × ${scheme2.name}`,
     getColor: (t: number, alpha: number, time: number) => {
-      const color1 = scheme1.getColor(t, alpha, time)
-      const color2 = scheme2.getColor(t, alpha, time)
+      const color1 = scheme1.getColor(t, alpha, time);
+      const color2 = scheme2.getColor(t, alpha, time);
 
-      return clampedBlend < 0.5 ? color1 : color2
+      return clampedBlend < 0.5 ? color1 : color2;
     },
     gradientStops: [
       ...(scheme1.gradientStops || []),
       ...(scheme2.gradientStops || []),
     ],
     supportsHDR: Boolean(scheme1.supportsHDR || scheme2.supportsHDR),
-  }
+  };
 }

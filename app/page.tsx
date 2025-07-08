@@ -7,9 +7,9 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { TrigonometricArtGenerator } from "@/components/trigonometric-art-generator"
+import { TrigonometricArtGenerator } from "@/components/trigonometric-art-generator";
 
 /**
  * Main application component
@@ -25,5 +25,5 @@ export default function HomePage(): React.JSX.Element {
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       <TrigonometricArtGenerator />
     </main>
-  )
+  );
 }

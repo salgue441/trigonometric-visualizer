@@ -5,44 +5,44 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { Settings } from "lucide-react"
-import { ColorMode } from "@/types"
-import { SliderControl } from "./slider-control"
-import { SelectControl } from "./select-control"
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Settings } from "lucide-react";
+import { ColorMode } from "@/types";
+import { SliderControl } from "./slider-control";
+import { SelectControl } from "./select-control";
+import { cn } from "@/lib/utils";
 
 /**
  * Parameter controls props interface
  */
 interface ParameterControlsProps {
   /** Trail effect value */
-  trails: number
+  trails: number;
 
   /** Line width value */
-  lineWidth: number
+  lineWidth: number;
 
   /** Animation speed value */
-  animationSpeed: number
+  animationSpeed: number;
 
   /** Complexity value */
-  complexity: number
+  complexity: number;
 
   /** Current color mode */
-  colorMode: ColorMode
+  colorMode: ColorMode;
 
   /** Available color schemes */
-  colorSchemes: Record<string, { name: string }>
+  colorSchemes: Record<string, { name: string }>;
 
   /** Control change handlers */
-  onTrailsChange: (value: number) => void
-  onLineWidthChange: (value: number) => void
-  onAnimationSpeedChange: (value: number) => void
-  onComplexityChange: (value: number) => void
-  onColorModeChange: (value: ColorMode) => void
+  onTrailsChange: (value: number) => void;
+  onLineWidthChange: (value: number) => void;
+  onAnimationSpeedChange: (value: number) => void;
+  onComplexityChange: (value: number) => void;
+  onColorModeChange: (value: ColorMode) => void;
 }
 
 /**
@@ -67,18 +67,18 @@ export function ParameterControls({
   onComplexityChange,
   onColorModeChange,
 }: ParameterControlsProps): React.JSX.Element {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768)
+    setIsMobile(window.innerWidth <= 768);
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
-    }
+      setIsMobile(window.innerWidth <= 768);
+    };
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -169,7 +169,7 @@ export function ParameterControls({
         transition={{ delay: 0.3 }}
         className={cn(
           "bg-amber-500/10 border border-amber-400/20 rounded-lg p-3",
-          "lg:hidden"
+          "lg:hidden",
         )}
       >
         <p className="text-xs text-amber-300 leading-relaxed">
@@ -187,16 +187,16 @@ export function ParameterControls({
         transition={{ delay: 0.4 }}
         onClick={() => {
           if (isMobile) {
-            onComplexityChange(2000)
-            onTrailsChange(0.92)
-            onAnimationSpeedChange(0.8)
+            onComplexityChange(2000);
+            onTrailsChange(0.92);
+            onAnimationSpeedChange(0.8);
           }
         }}
         className={cn(
           "w-full lg:hidden p-3 rounded-lg",
           "bg-blue-500/20 border border-blue-400/30 text-blue-300",
           "hover:bg-blue-500/30 transition-colors",
-          "text-sm font-medium"
+          "text-sm font-medium",
         )}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -204,5 +204,5 @@ export function ParameterControls({
         🚀 Auto-optimize for Mobile
       </motion.button>
     </div>
-  )
+  );
 }

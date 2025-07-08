@@ -3,4 +3,4 @@
  * @fileoverview Barrel export
  */
 
-export { ControlPanel } from "./control-panel"
+export { ControlPanel } from "./control-panel";

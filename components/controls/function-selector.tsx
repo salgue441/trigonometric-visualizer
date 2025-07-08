@@ -5,25 +5,25 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Zap } from "lucide-react"
-import { TrigFunction } from "@/types"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { Zap } from "lucide-react";
+import { TrigFunction } from "@/types";
+import { cn } from "@/lib/utils";
 
 /**
  * Function selector props interface
  */
 interface FunctionSelectorProps {
   /** Currently selected function */
-  selectedFunction: TrigFunction
-  
+  selectedFunction: TrigFunction;
+
   /** Available functions to choose from */
-  functions: TrigFunction[]
+  functions: TrigFunction[];
 
   /** Function selection handler */
-  onFunctionSelect: (funcId: string) => void
+  onFunctionSelect: (funcId: string) => void;
 }
 
 /**
@@ -64,11 +64,11 @@ export function FunctionSelector({
             className={cn(
               "text-left p-3 sm:p-4 rounded-lg border transition-all",
               "min-h-[60px] sm:min-h-[70px]",
-              "active:scale-95", 
-              "text-xs sm:text-sm", 
+              "active:scale-95",
+              "text-xs sm:text-sm",
               selectedFunction.id === func.id
                 ? "bg-cyan-500/20 border-cyan-400/50 shadow-lg shadow-cyan-400/10"
-                : "glass border-white/10 hover:bg-white/10 hover:border-white/20"
+                : "glass border-white/10 hover:bg-white/10 hover:border-white/20",
             )}
             whileHover={{
               scale: 1.02,
@@ -85,7 +85,9 @@ export function FunctionSelector({
               className={cn(
                 "font-medium mb-1",
                 "text-sm sm:text-base",
-                selectedFunction.id === func.id ? "text-cyan-300" : "text-white"
+                selectedFunction.id === func.id
+                  ? "text-cyan-300"
+                  : "text-white",
               )}
             >
               {func.name}
@@ -95,8 +97,8 @@ export function FunctionSelector({
             <div
               className={cn(
                 "text-slate-400 leading-relaxed",
-                "text-xs sm:text-sm", 
-                "line-clamp-2" 
+                "text-xs sm:text-sm",
+                "line-clamp-2",
               )}
             >
               {func.description}
@@ -126,5 +128,5 @@ export function FunctionSelector({
         </p>
       </motion.div>
     </div>
-  )
+  );
 }

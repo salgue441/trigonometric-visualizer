@@ -5,9 +5,9 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import {
   Play,
   Pause,
@@ -16,32 +16,32 @@ import {
   Minimize2,
   Maximize2,
   Settings,
-} from "lucide-react"
-import { AnimationState, PerformanceMetrics } from "@/types"
-import { cn } from "@/lib/utils"
+} from "lucide-react";
+import { AnimationState, PerformanceMetrics } from "@/types";
+import { cn } from "@/lib/utils";
 
 /**
  * Canvas controls props interface
  */
 interface CanvasControlsProps {
   /** Animation state */
-  animationState: AnimationState
+  animationState: AnimationState;
 
   /** Performance metrics */
-  performance: PerformanceMetrics
+  performance: PerformanceMetrics;
 
   /** Whether in fullscreen mode */
-  isFullscreen: boolean
+  isFullscreen: boolean;
 
   /** Whether to show controls on mobile */
-  showControls: boolean
-  
+  showControls: boolean;
+
   /** Control handlers */
-  onTogglePlayPause: () => void
-  onResetAnimation: () => void
-  onExportImage: () => void
-  onToggleFullscreen: () => void
-  onToggleControls: () => void
+  onTogglePlayPause: () => void;
+  onResetAnimation: () => void;
+  onExportImage: () => void;
+  onToggleFullscreen: () => void;
+  onToggleControls: () => void;
 }
 
 /**
@@ -70,7 +70,7 @@ export function CanvasControls({
       className={cn(
         "flex items-center justify-between p-3 sm:p-4",
         "border-b border-white/10 bg-black/20 backdrop-blur-sm",
-        "safe-left safe-right"
+        "safe-left safe-right",
       )}
     >
       {/* Left Controls */}
@@ -83,7 +83,7 @@ export function CanvasControls({
             "flex items-center gap-2 rounded-lg",
             "px-3 py-2 sm:px-4 sm:py-2",
             "min-h-[44px] sm:min-h-[40px]",
-            "text-sm sm:text-base"
+            "text-sm sm:text-base",
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -109,7 +109,7 @@ export function CanvasControls({
           className={cn(
             "bg-slate-600 hover:bg-slate-700 text-white transition-colors rounded-lg",
             "p-2 sm:p-2.5",
-            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]"
+            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]",
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -134,7 +134,7 @@ export function CanvasControls({
               ? "text-green-400 border-green-400/20"
               : performance.fps > 30
                 ? "text-yellow-400 border-yellow-400/20"
-                : "text-red-400 border-red-400/20"
+                : "text-red-400 border-red-400/20",
           )}
         >
           {/* Quality indicator dot */}
@@ -145,7 +145,7 @@ export function CanvasControls({
                 ? "bg-green-400"
                 : performance.fps > 30
                   ? "bg-yellow-400"
-                  : "bg-red-400"
+                  : "bg-red-400",
             )}
           />
 
@@ -161,7 +161,7 @@ export function CanvasControls({
           className={cn(
             "bg-transparent hover:bg-white/10 text-white transition-colors rounded-lg",
             "p-2 sm:p-2.5",
-            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]"
+            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]",
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -176,7 +176,7 @@ export function CanvasControls({
           className={cn(
             "bg-transparent hover:bg-white/10 text-white transition-colors rounded-lg",
             "p-2 sm:p-2.5",
-            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]"
+            "min-h-[44px] sm:min-h-[40px] min-w-[44px] sm:min-w-[40px]",
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -196,7 +196,7 @@ export function CanvasControls({
             className={cn(
               "bg-transparent hover:bg-white/10 text-white transition-colors rounded-lg",
               "p-2 sm:p-2.5 lg:hidden",
-              "min-h-[44px] min-w-[44px]"
+              "min-h-[44px] min-w-[44px]",
             )}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -207,5 +207,5 @@ export function CanvasControls({
         )}
       </div>
     </motion.div>
-  )
+  );
 }

@@ -5,33 +5,33 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { AnimatePresence, motion } from "framer-motion"
-import { Code } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { AnimatePresence, motion } from "framer-motion";
+import { Code } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * Custom equations props interface
  */
 interface CustomEquationsProps {
   /** Custom X equation value */
-  customX: string
+  customX: string;
 
   /** Custom Y equation value */
-  customY: string
+  customY: string;
 
   /** Whether custom mode is active */
-  isCustomMode: boolean
+  isCustomMode: boolean;
 
   /** Toggle custom mode handler */
-  onToggleCustomMode: () => void
+  onToggleCustomMode: () => void;
 
   /** Custom X equation change handler */
-  onCustomXChange: (value: string) => void
+  onCustomXChange: (value: string) => void;
 
   /** Custom Y equation change handler */
-  onCustomYChange: (value: string) => void
+  onCustomYChange: (value: string) => void;
 }
 
 /**
@@ -72,7 +72,7 @@ export function CustomEquations({
             "min-h-[32px] min-w-[60px]",
             isCustomMode
               ? "bg-green-500/20 border-green-400/50 text-green-300"
-              : "glass border-white/20 hover:bg-white/10 text-white"
+              : "glass border-white/20 hover:bg-white/10 text-white",
           )}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -116,7 +116,7 @@ export function CustomEquations({
                     "text-white placeholder-gray-400 font-mono",
                     "focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20",
                     "text-sm sm:text-xs",
-                    "min-h-[44px] sm:min-h-[36px]"
+                    "min-h-[44px] sm:min-h-[36px]",
                   )}
                   placeholder="e.g., 200 * sin(3 * t + time)"
                   spellCheck={false}
@@ -148,7 +148,7 @@ export function CustomEquations({
                     "text-white placeholder-gray-400 font-mono",
                     "focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20",
                     "text-sm sm:text-xs",
-                    "min-h-[44px] sm:min-h-[36px]"
+                    "min-h-[44px] sm:min-h-[36px]",
                   )}
                   placeholder="e.g., 200 * cos(2 * t + time)"
                   spellCheck={false}
@@ -181,5 +181,5 @@ export function CustomEquations({
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }

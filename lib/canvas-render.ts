@@ -462,7 +462,6 @@ export class CanvasRenderer {
     centerY: number,
     scaleFactor: number
   ): void {
-    const ctx = this.ctx
     const baseBatchSize = this.options.quality === "low" ? 20 : 50
     const batchSize = Math.floor(baseBatchSize * scaleFactor)
     const usePath2D =
@@ -532,7 +531,6 @@ export class CanvasRenderer {
       path.lineTo(x2, y2)
     }
 
-    const batchProgress = startIndex / points.length
     const gradient = this.createGradientForBatch(
       points,
       startIndex,
@@ -732,7 +730,11 @@ export class CanvasRenderer {
 
     this.ctx.globalCompositeOperation = "screen"
     this.ctx.globalAlpha = 0.3
-    this.ctx.drawImage(this.offscreenCanvas as any, 0, 0)
+    this.ctx.drawImage(
+      this.offscreenCanvas as unknown as CanvasImageSource,
+      0,
+      0
+    )
     this.ctx.globalAlpha = 1
   }
 
@@ -988,7 +990,5 @@ export class CanvasRenderer {
 
     this.offscreenCanvas = undefined
     this.offscreenCtx = undefined
-
-    console.log("CanvasRenderer disposed")
   }
 }

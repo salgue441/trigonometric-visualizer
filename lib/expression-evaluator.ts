@@ -150,7 +150,10 @@ interface EvaluationStats {
  * expressions with advanced caching, validation, and monitoring capabilities
  */
 export class ExpressionEvaluator {
-  private static readonly expressionCache = new Map<string, Function>()
+  private static readonly expressionCache = new Map<
+    string,
+    (context: EvaluationContext) => number
+  >()
   private static readonly validationCache = new Map<string, ValidationResult>()
   private static readonly MAX_CACHE_SIZE = 1000
   private static readonly EVALUATION_TIMEOUT = 100
@@ -419,7 +422,7 @@ export class ExpressionEvaluator {
         return 0
       }
 
-      const cacheKey = this.createCacheKey(expression, context)
+      const cacheKey = this.createCacheKey(expression)
       if (this.expressionCache.has(cacheKey)) {
         this.updateStats(startTime, true)
 
@@ -453,14 +456,18 @@ export class ExpressionEvaluator {
   }
 
   /**
-   * Compiles a mathematical expression into an optimized function
+   * Compiles a mathematical expression into an optimized evaluation function
    *
    * @private
    * @param expression - Expression to compile
-   * @returns Compiled function
+   * @returns Compiled function that takes EvaluationContext and returns a number
+   * @throws Error if compilation fails
    */
-  private static compileExpression(expression: string): Function {
-    let safeExpression = expression
+  private static compileExpression(
+    expression: string
+  ): (context: EvaluationContext) => number {
+    // Transform expression to use Math functions directly
+    const safeExpression = expression
       .replace(
         /\b(sin|cos|tan|asin|acos|atan|atan2|sinh|cosh|tanh|asinh|acosh|atanh)\s*\(/g,
         "Math.$1("
@@ -477,20 +484,29 @@ export class ExpressionEvaluator {
       .replace(/\bRAD2DEG\b/g, "(180 / Math.PI)")
 
     try {
-      return new Function(
+      const compiledFn = new Function(
         "context",
         `
-        const { t = 0, time = 0, ...vars } = context || {}
-        try {
-          const result = ${safeExpression}
-          return isFinite(result) ? result : 0
-        } catch (error) {
-          return 0
-        }
+      "use strict";
+      const { t = 0, time = 0, ...vars } = context || {};
+      try {
+        const result = ${safeExpression};
+        return isFinite(result) ? result : 0;
+      } catch (error) {
+        return 0;
+      }
       `
-      )
+      ) as (context: EvaluationContext) => number
+
+      if (typeof compiledFn !== "function") {
+        throw new Error("Compilation did not produce a function")
+      }
+
+      return compiledFn
     } catch (error) {
-      throw new Error(`Failed to compile expression: ${error}`)
+      throw new Error(
+        `Failed to compile expression: ${error instanceof Error ? error.message : String(error)}`
+      )
     }
   }
 
@@ -503,7 +519,7 @@ export class ExpressionEvaluator {
    * @returns Function result
    */
   private static executeFunction(
-    func: Function,
+    func: (context: EvaluationContext) => number,
     context: EvaluationContext
   ): number {
     const startTime = performance.now()
@@ -534,10 +550,7 @@ export class ExpressionEvaluator {
    * @param context - Evaluation context
    * @returns Cache key string
    */
-  private static createCacheKey(
-    expression: string,
-    _context: EvaluationContext
-  ): string {
+  private static createCacheKey(expression: string): string {
     return expression.trim()
   }
 

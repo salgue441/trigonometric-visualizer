@@ -5,24 +5,24 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { TrigFunction } from "@/types"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { TrigFunction } from "@/types";
+import { cn } from "@/lib/utils";
 
 /**
  * Equation display props interface
  */
 interface EquationDisplayProps {
   /** Current function being visualized */
-  currentFunction: TrigFunction
+  currentFunction: TrigFunction;
 
   /** Whether to show equations */
-  showEquations: boolean
-  
+  showEquations: boolean;
+
   /** Whether in fullscreen mode */
-  isFullscreen: boolean
+  isFullscreen: boolean;
 }
 
 /**
@@ -39,15 +39,15 @@ export function EquationDisplay({
   showEquations,
   isFullscreen,
 }: EquationDisplayProps): React.JSX.Element | null {
-  if (!showEquations || isFullscreen) return null
+  if (!showEquations || isFullscreen) return null;
 
   /**
    * Formats mathematical equations with basic syntax highlighting
    */
   const formatEquation = (equation: string): React.JSX.Element => {
     const parts = equation.split(
-      /(\b(?:sin|cos|tan|abs|sqrt|pow|exp|log|PI|E)\b|\d+\.?\d*|[+\-*/().])/g
-    )
+      /(\b(?:sin|cos|tan|abs|sqrt|pow|exp|log|PI|E)\b|\d+\.?\d*|[+\-*/().])/g,
+    );
 
     return (
       <span>
@@ -57,37 +57,37 @@ export function EquationDisplay({
               <span key={index} className="text-cyan-400 font-semibold">
                 {part}
               </span>
-            )
+            );
           } else if (/\b(?:PI|E)\b/.test(part)) {
             return (
               <span key={index} className="text-purple-400 font-semibold">
                 {part}
               </span>
-            )
+            );
           } else if (/\d+\.?\d*/.test(part)) {
             return (
               <span key={index} className="text-green-400">
                 {part}
               </span>
-            )
+            );
           } else if (/[+\-*/()]/.test(part)) {
             return (
               <span key={index} className="text-yellow-400">
                 {part}
               </span>
-            )
+            );
           } else if (part === "t" || part === "time") {
             return (
               <span key={index} className="text-pink-400 font-semibold">
                 {part}
               </span>
-            )
+            );
           }
-          return <span key={index}>{part}</span>
+          return <span key={index}>{part}</span>;
         })}
       </span>
-    )
-  }
+    );
+  };
 
   return (
     <motion.div
@@ -99,7 +99,7 @@ export function EquationDisplay({
         "mx-2 sm:mx-4 mb-2",
         "bg-black/40 backdrop-blur-md border border-white/20",
         "p-2 sm:p-3 rounded-lg",
-        "safe-left safe-right" 
+        "safe-left safe-right",
       )}
     >
       {/* Compact Header */}
@@ -128,7 +128,7 @@ export function EquationDisplay({
       <div
         className={cn(
           "space-y-1 sm:space-y-2",
-          "text-xs sm:text-sm font-mono leading-tight"
+          "text-xs sm:text-sm font-mono leading-tight",
         )}
       >
         {/* X Equation */}
@@ -174,5 +174,5 @@ export function EquationDisplay({
         </p>
       </motion.div>
     </motion.div>
-  )
+  );
 }

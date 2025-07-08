@@ -5,24 +5,24 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ChevronDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * Select option interface
  */
 interface SelectOption<T> {
   /** Option value */
-  value: T
-  
+  value: T;
+
   /** Display label */
-  label: string
+  label: string;
 
   /** Optional description */
-  description?: string
+  description?: string;
 }
 
 /**
@@ -30,22 +30,22 @@ interface SelectOption<T> {
  */
 interface SelectControlProps<T> {
   /** Control label */
-  label: string
-  
+  label: string;
+
   /** Current value */
-  value: T
+  value: T;
 
   /** Available options */
-  options: SelectOption<T>[]
+  options: SelectOption<T>[];
 
   /** Value change handler */
-  onChange: (value: T) => void
+  onChange: (value: T) => void;
 
   /** Optional description */
-  description?: string
+  description?: string;
 
   /** Additional CSS classes */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -65,7 +65,7 @@ export function SelectControl<T extends string>({
   description,
   className,
 }: SelectControlProps<T>): React.JSX.Element {
-  const currentOption = options.find((option) => option.value === value)
+  const currentOption = options.find((option) => option.value === value);
 
   return (
     <motion.div
@@ -87,9 +87,9 @@ export function SelectControl<T extends string>({
             "w-full p-3 sm:p-2 bg-black/50 border border-white/20 rounded-lg",
             "text-white appearance-none cursor-pointer",
             "focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20",
-            "text-sm", 
-            "min-h-[44px] sm:min-h-[36px]", 
-            "pr-10" 
+            "text-sm",
+            "min-h-[44px] sm:min-h-[36px]",
+            "pr-10",
           )}
           whileFocus={{ scale: 1.02 }}
           transition={{ duration: 0.15 }}
@@ -128,5 +128,5 @@ export function SelectControl<T extends string>({
         <p className="text-xs text-slate-400 leading-relaxed">{description}</p>
       )}
     </motion.div>
-  )
+  );
 }

@@ -5,46 +5,46 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { forwardRef, RefObject } from "react"
-import { motion } from "framer-motion"
-import { TrigFunction, AnimationState, PerformanceMetrics } from "@/types"
-import { CanvasControls } from "./canvas-control"
-import { EquationDisplay } from "./equation-display"
-import { cn } from "@/lib/utils"
+import { forwardRef, RefObject } from "react";
+import { motion } from "framer-motion";
+import { TrigFunction, AnimationState, PerformanceMetrics } from "@/types";
+import { CanvasControls } from "./canvas-control";
+import { EquationDisplay } from "./equation-display";
+import { cn } from "@/lib/utils";
 
 /**
  * Canvas area props interface
  */
 interface CanvasAreaProps {
   /** Canvas container ref */
-  containerRef: RefObject<HTMLDivElement>
+  containerRef: RefObject<HTMLDivElement>;
 
   /** Current function being visualized */
-  currentFunction: TrigFunction
+  currentFunction: TrigFunction;
 
   /** Animation state */
-  animationState: AnimationState
+  animationState: AnimationState;
 
   /** Performance metrics */
-  performance: PerformanceMetrics
+  performance: PerformanceMetrics;
 
   /** Whether to show equations */
-  showEquations: boolean
+  showEquations: boolean;
 
   /** Whether in fullscreen mode */
-  isFullscreen: boolean
+  isFullscreen: boolean;
 
   /** Whether to show controls on mobile */
-  showControls: boolean
+  showControls: boolean;
 
   /** Control handlers */
-  onTogglePlayPause: () => void
-  onResetAnimation: () => void
-  onExportImage: () => void
-  onToggleFullscreen: () => void
-  onToggleControls: () => void
+  onTogglePlayPause: () => void;
+  onResetAnimation: () => void;
+  onExportImage: () => void;
+  onToggleFullscreen: () => void;
+  onToggleControls: () => void;
 }
 
 /**
@@ -73,14 +73,14 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
       onToggleFullscreen,
       onToggleControls,
     },
-    canvasRef
+    canvasRef,
   ) => {
     return (
       <div
         className={cn(
           "flex-1 flex flex-col",
           "min-h-0",
-          !showControls && "lg:w-full"
+          !showControls && "lg:w-full",
         )}
       >
         {/* Canvas Controls */}
@@ -115,14 +115,14 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
             "flex-1 p-2 sm:p-4",
             "safe-left safe-right safe-bottom",
             "min-h-0",
-            "overflow-hidden"
+            "overflow-hidden",
           )}
         >
           <div
             className={cn(
               "canvas-container h-full w-full relative",
               "min-h-[200px] max-h-full",
-              "touch-none"
+              "touch-none",
             )}
           >
             <canvas
@@ -132,7 +132,7 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
                 "gpu-accelerated contain-paint",
                 "bg-gradient-to-br from-slate-900/50 to-blue-900/50",
                 "border border-white/10 shadow-2xl",
-                "block"
+                "block",
               )}
               style={{
                 imageRendering: "auto",
@@ -150,7 +150,7 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
               <div
                 className={cn(
                   "absolute inset-0 flex items-center justify-center pointer-events-none",
-                  "lg:hidden bg-black/20 backdrop-blur-sm rounded-xl transition-opacity"
+                  "lg:hidden bg-black/20 backdrop-blur-sm rounded-xl transition-opacity",
                 )}
               >
                 <div className="text-center p-4">
@@ -171,7 +171,7 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
                   ? "text-green-400 border-green-400/20"
                   : performance.fps > 30
                     ? "text-yellow-400 border-yellow-400/20"
-                    : "text-red-400 border-red-400/20"
+                    : "text-red-400 border-red-400/20",
               )}
             >
               {performance.fps} FPS
@@ -182,7 +182,7 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
               className={cn(
                 "absolute bottom-2 left-2 lg:hidden",
                 "px-2 py-1 rounded-full text-xs font-medium",
-                "bg-black/50 backdrop-blur-sm border border-white/20 text-white/60"
+                "bg-black/50 backdrop-blur-sm border border-white/20 text-white/60",
               )}
             >
               {performance.pointCount} pts
@@ -190,8 +190,8 @@ export const CanvasArea = forwardRef<HTMLCanvasElement, CanvasAreaProps>(
           </div>
         </motion.div>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-CanvasArea.displayName = "CanvasArea"
+CanvasArea.displayName = "CanvasArea";

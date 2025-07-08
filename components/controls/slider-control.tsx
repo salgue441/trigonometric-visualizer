@@ -5,45 +5,45 @@
  * @version 1.0.0
  */
 
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { AlertTriangle } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { AlertTriangle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * Slider control props interface
  */
 interface SliderControlProps {
   /** Control label */
-  label: string
+  label: string;
 
   /** Current value */
-  value: number
+  value: number;
 
   /** Formatted display value */
-  displayValue: string
+  displayValue: string;
 
   /** Minimum value */
-  min: number
+  min: number;
 
   /** Maximum value */
-  max: number
+  max: number;
 
   /** Step increment */
-  step: number
+  step: number;
 
   /** Value change handler */
-  onChange: (value: number) => void
+  onChange: (value: number) => void;
 
   /** Optional description */
-  description?: string
+  description?: string;
 
   /** Optional warning message */
-  warning?: string
-  
+  warning?: string;
+
   /** Additional CSS classes */
-  className?: string
+  className?: string;
 }
 
 /**
@@ -67,7 +67,7 @@ export function SliderControl({
   warning,
   className,
 }: SliderControlProps): React.JSX.Element {
-  const percentage = ((value - min) / (max - min)) * 100
+  const percentage = ((value - min) / (max - min)) * 100;
 
   return (
     <motion.div
@@ -112,7 +112,7 @@ export function SliderControl({
               "absolute w-full h-6 opacity-0 cursor-pointer",
               "appearance-none bg-transparent",
               "focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:ring-offset-2",
-              "focus:ring-offset-slate-900"
+              "focus:ring-offset-slate-900",
             )}
             aria-label={`${label} slider, current value ${displayValue}`}
           />
@@ -123,7 +123,7 @@ export function SliderControl({
               "absolute w-5 h-5 bg-white rounded-full shadow-lg",
               "border-2 border-blue-400",
               "pointer-events-none",
-              "transform -translate-x-1/2"
+              "transform -translate-x-1/2",
             )}
             style={{ left: `${percentage}%` }}
             animate={{ left: `${percentage}%` }}
@@ -150,5 +150,5 @@ export function SliderControl({
         </motion.div>
       )}
     </motion.div>
-  )
+  );
 }

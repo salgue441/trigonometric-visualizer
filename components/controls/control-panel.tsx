@@ -106,19 +106,20 @@ export function ControlPanel({
           }}
           className={cn(
             "glass border-r border-white/10 overflow-y-auto",
-            "w-full lg:w-80", 
-            "absolute lg:relative", 
-            "h-full lg:h-auto", 
-            "z-40", 
-            "safe-left safe-right", 
-            "p-3 sm:p-4", 
-            "flex-shrink-0" 
+            "w-full lg:w-80",
+            "absolute lg:relative",
+            "h-full lg:h-auto",
+            "z-40",
+            "safe-left safe-right",
+            "p-3 sm:p-4",
+            "flex-shrink-0"
           )}
         >
           {/* Mobile close button */}
           <div className="lg:hidden flex justify-end mb-2">
             <button
               onClick={() => {
+                // Does not do nothing
               }}
               className="p-2 text-white/60 hover:text-white transition-colors"
               aria-label="Close control panel"

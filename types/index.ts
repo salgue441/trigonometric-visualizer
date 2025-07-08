@@ -15,7 +15,7 @@ export type ColorMode =
   | "ocean"
   | "galaxy"
   | "neon"
-  | "aurora"
+  | "aurora";
 
 /**
  * Represents a mathematical function configuration for art generation
@@ -24,34 +24,34 @@ export type ColorMode =
  */
 export interface TrigFunction {
   /** Unique identifier for the function */
-  readonly id: string
+  readonly id: string;
 
   /** Display name of the function */
-  readonly name: string
+  readonly name: string;
 
   /** Brief description of what the function creates */
-  readonly description: string
+  readonly description: string;
 
   /** Mathematical expression for X coordinate */
-  readonly xEquation: string
+  readonly xEquation: string;
 
   /** Mathematical expression for Y coordinate */
-  readonly yEquation: string
+  readonly yEquation: string;
 
   /** Color scheme for the visualization */
-  readonly colorMode: ColorMode
+  readonly colorMode: ColorMode;
 
   /** Speed multiplier for animation (0.1 to 3.0) */
-  readonly animationSpeed: number
+  readonly animationSpeed: number;
 
   /** Number of points to calculate (affects detail level) */
-  readonly complexity: number
+  readonly complexity: number;
 
   /** Default line width for rendering (0.5 to 5.0) */
-  readonly lineWidth: number
+  readonly lineWidth: number;
 
   /** Default trail opacity for ghosting effect (0.8 to 0.99) */
-  readonly trailOpacity: number
+  readonly trailOpacity: number;
 }
 
 /**
@@ -61,25 +61,25 @@ export interface TrigFunction {
  */
 export interface Point {
   /** X coordinate in canvas space */
-  readonly x: number
+  readonly x: number;
 
   /** Y coordinate in canvas space */
-  readonly y: number
+  readonly y: number;
 
   /** Color hue value (0-1) for gradient calculations */
-  readonly hue: number
+  readonly hue: number;
 
   /** Opacity value (0-1) for alpha blending */
-  readonly alpha: number
+  readonly alpha: number;
 
   /** Point index for gradient calculations */
-  readonly index: number
+  readonly index: number;
 
   /** Distance from center for radial effects */
-  readonly distance?: number
+  readonly distance?: number;
 
   /** Velocity for motion blur effects */
-  readonly velocity?: { x: number; y: number }
+  readonly velocity?: { x: number; y: number };
 }
 
 /**
@@ -89,22 +89,22 @@ export interface Point {
  */
 export interface RenderConfig {
   /** Canvas width in pixels */
-  readonly width: number
+  readonly width: number;
 
   /** Canvas height in pixels */
-  readonly height: number
+  readonly height: number;
 
   /** Center X coordinate */
-  readonly centerX: number
+  readonly centerX: number;
 
   /** Center Y coordinate */
-  readonly centerY: number
+  readonly centerY: number;
 
   /** Device pixel ratio for high-DPI displays */
-  readonly pixelRatio: number
+  readonly pixelRatio: number;
 
   /** Maximum texture size for WebGL contexts */
-  readonly maxTextureSize?: number
+  readonly maxTextureSize?: number;
 }
 
 /**
@@ -114,22 +114,22 @@ export interface RenderConfig {
  */
 export interface AnimationState {
   /** Current animation time in seconds */
-  time: number
+  time: number;
 
   /** Whether animation is currently playing */
-  isPlaying: boolean
+  isPlaying: boolean;
 
   /** Animation frame request ID for cleanup */
-  frameId: number | null
+  frameId: number | null;
 
   /** Last frame timestamp for delta time calculations */
-  lastFrameTime: number
+  lastFrameTime: number;
 
   /** Current frames per second */
-  fps: number
+  fps: number;
 
   /** Total frames rendered */
-  frameCount: number
+  frameCount: number;
 }
 
 /**
@@ -139,19 +139,19 @@ export interface AnimationState {
  */
 export interface PerformanceMetrics {
   /** Current frames per second */
-  readonly fps: number
+  readonly fps: number;
 
   /** Total points being rendered */
-  readonly pointCount: number
+  readonly pointCount: number;
 
   /** Average frame time in milliseconds */
-  readonly avgFrameTime: number
+  readonly avgFrameTime: number;
 
   /** Memory usage estimate in MB */
-  readonly memoryUsage: number
+  readonly memoryUsage: number;
 
   /** GPU utilization percentage (if available) */
-  readonly gpuUtilization?: number
+  readonly gpuUtilization?: number;
 }
 
 /**
@@ -161,16 +161,16 @@ export interface PerformanceMetrics {
  */
 export interface ColorScheme {
   /** Display name of the color scheme */
-  readonly name: string
+  readonly name: string;
 
   /** Function to generate color based on parameters */
-  readonly getColor: (t: number, alpha: number, time: number) => string
+  readonly getColor: (t: number, alpha: number, time: number) => string;
 
   /** Optional gradient stops for complex color schemes */
-  readonly gradientStops?: readonly string[]
+  readonly gradientStops?: readonly string[];
 
   /** Whether this scheme supports HDR colors */
-  readonly supportsHDR?: boolean
+  readonly supportsHDR?: boolean;
 }
 
 /**
@@ -180,22 +180,22 @@ export interface ColorScheme {
  */
 export interface UserSettings {
   /** Preferred quality setting */
-  quality: "low" | "medium" | "high" | "ultra"
+  quality: "low" | "medium" | "high" | "ultra";
 
   /** Whether to show performance overlay */
-  showPerformance: boolean
+  showPerformance: boolean;
 
   /** Whether to enable advanced effects */
-  enableAdvancedEffects: boolean
+  enableAdvancedEffects: boolean;
 
   /** Preferred color scheme */
-  preferredColorMode: ColorMode
+  preferredColorMode: ColorMode;
 
   /** Auto-save interval in minutes */
-  autoSaveInterval: number
+  autoSaveInterval: number;
 
   /** Maximum allowed complexity for performance */
-  maxComplexity: number
+  maxComplexity: number;
 }
 
 /**
@@ -205,13 +205,13 @@ export interface UserSettings {
  */
 export interface EvaluationContext {
   /** Parameter variable */
-  readonly t: number
+  readonly t: number;
 
   /** Time variable for animation */
-  readonly time: number
+  readonly time: number;
 
   /** Additional custom variables */
-  readonly [key: string]: number
+  readonly [key: string]: number;
 }
 
 /**
@@ -222,7 +222,7 @@ export type ErrorType =
   | "CANVAS_INITIALIZATION_ERROR"
   | "WEBGL_NOT_SUPPORTED"
   | "PERFORMANCE_DEGRADATION"
-  | "MEMORY_LIMIT_EXCEEDED"
+  | "MEMORY_LIMIT_EXCEEDED";
 
 /**
  * Application error with context
@@ -231,17 +231,17 @@ export type ErrorType =
  */
 export interface AppError {
   /** Error type for categorization */
-  readonly type: ErrorType
+  readonly type: ErrorType;
 
   /** Human-readable error message */
-  readonly message: string
+  readonly message: string;
 
   /** Technical details for debugging */
-  readonly details?: string
+  readonly details?: string;
 
   /** Timestamp when error occurred */
-  readonly timestamp: number
+  readonly timestamp: number;
 
   /** Whether the error is recoverable */
-  readonly recoverable: boolean
+  readonly recoverable: boolean;
 }

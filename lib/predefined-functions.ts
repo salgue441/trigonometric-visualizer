@@ -8,7 +8,7 @@
  * @version 1.0.0
  */
 
-import type { TrigFunction, ColorMode } from "@/types"
+import type { TrigFunction, ColorMode } from "@/types";
 
 /**
  * Collection of predefined mathematical functions for art generation
@@ -318,7 +318,7 @@ export const PREDEFINED_FUNCTIONS: TrigFunction[] = [
     lineWidth: 1.2,
     trailOpacity: 0.998,
   },
-]
+];
 
 /**
  * Gets a predefined function by ID with error handling
@@ -339,7 +339,7 @@ export function getPredefinedFunction(id: string): TrigFunction {
   return (
     PREDEFINED_FUNCTIONS.find((func) => func.id === id) ||
     PREDEFINED_FUNCTIONS[0]
-  )
+  );
 }
 
 /**
@@ -357,7 +357,7 @@ export function getPredefinedFunction(id: string): TrigFunction {
  * ```
  */
 export function getPredefinedFunctionIds(): string[] {
-  return PREDEFINED_FUNCTIONS.map((func) => func.id)
+  return PREDEFINED_FUNCTIONS.map((func) => func.id);
 }
 
 /**
@@ -375,7 +375,7 @@ export function getPredefinedFunctionIds(): string[] {
  * ```
  */
 export function getFunctionsByColorMode(colorMode: ColorMode): TrigFunction[] {
-  return PREDEFINED_FUNCTIONS.filter((func) => func.colorMode === colorMode)
+  return PREDEFINED_FUNCTIONS.filter((func) => func.colorMode === colorMode);
 }
 
 /**
@@ -396,12 +396,12 @@ export function getFunctionsByColorMode(colorMode: ColorMode): TrigFunction[] {
  */
 export function getFunctionsByComplexity(
   minComplexity: number,
-  maxComplexity: number
+  maxComplexity: number,
 ): TrigFunction[] {
   return PREDEFINED_FUNCTIONS.filter(
     (func) =>
-      func.complexity >= minComplexity && func.complexity <= maxComplexity
-  )
+      func.complexity >= minComplexity && func.complexity <= maxComplexity,
+  );
 }
 
 /**
@@ -422,11 +422,12 @@ export function getFunctionsByComplexity(
  */
 export function getFunctionsBySpeed(
   minSpeed: number,
-  maxSpeed: number
+  maxSpeed: number,
 ): TrigFunction[] {
   return PREDEFINED_FUNCTIONS.filter(
-    (func) => func.animationSpeed >= minSpeed && func.animationSpeed <= maxSpeed
-  )
+    (func) =>
+      func.animationSpeed >= minSpeed && func.animationSpeed <= maxSpeed,
+  );
 }
 
 /**
@@ -446,44 +447,46 @@ export function getFunctionsBySpeed(
  */
 export function getRandomFunction(
   options: {
-    colorMode?: ColorMode
-    minComplexity?: number
-    maxComplexity?: number
-    minSpeed?: number
-    maxSpeed?: number
-  } = {}
+    colorMode?: ColorMode;
+    minComplexity?: number;
+    maxComplexity?: number;
+    minSpeed?: number;
+    maxSpeed?: number;
+  } = {},
 ): TrigFunction {
-  let functions = PREDEFINED_FUNCTIONS
+  let functions = PREDEFINED_FUNCTIONS;
 
   if (options.colorMode) {
-    functions = functions.filter((func) => func.colorMode === options.colorMode)
+    functions = functions.filter(
+      (func) => func.colorMode === options.colorMode,
+    );
   }
 
   if (
     options.minComplexity !== undefined ||
     options.maxComplexity !== undefined
   ) {
-    const min = options.minComplexity ?? 0
-    const max = options.maxComplexity ?? Infinity
+    const min = options.minComplexity ?? 0;
+    const max = options.maxComplexity ?? Infinity;
     functions = functions.filter(
-      (func) => func.complexity >= min && func.complexity <= max
-    )
+      (func) => func.complexity >= min && func.complexity <= max,
+    );
   }
 
   if (options.minSpeed !== undefined || options.maxSpeed !== undefined) {
-    const min = options.minSpeed ?? 0
-    const max = options.maxSpeed ?? Infinity
+    const min = options.minSpeed ?? 0;
+    const max = options.maxSpeed ?? Infinity;
     functions = functions.filter(
-      (func) => func.animationSpeed >= min && func.animationSpeed <= max
-    )
+      (func) => func.animationSpeed >= min && func.animationSpeed <= max,
+    );
   }
 
   if (functions.length === 0) {
-    return PREDEFINED_FUNCTIONS[0] 
+    return PREDEFINED_FUNCTIONS[0];
   }
 
-  const randomIndex = Math.floor(Math.random() * functions.length)
-  return functions[randomIndex]
+  const randomIndex = Math.floor(Math.random() * functions.length);
+  return functions[randomIndex];
 }
 
 /**
@@ -505,58 +508,58 @@ export function getRandomFunction(
  */
 export function createFunctionPlaylist(
   options: {
-    sortBy?: "complexity" | "speed" | "name" | "random"
-    maxFunctions?: number
-    excludeIds?: string[]
-    includeOnlyColorModes?: ColorMode[]
-  } = {}
+    sortBy?: "complexity" | "speed" | "name" | "random";
+    maxFunctions?: number;
+    excludeIds?: string[];
+    includeOnlyColorModes?: ColorMode[];
+  } = {},
 ): TrigFunction[] {
-  let functions = [...PREDEFINED_FUNCTIONS]
+  let functions = [...PREDEFINED_FUNCTIONS];
   if (options.excludeIds) {
     functions = functions.filter(
-      (func) => !options.excludeIds!.includes(func.id)
-    )
+      (func) => !options.excludeIds!.includes(func.id),
+    );
   }
 
   if (options.includeOnlyColorModes) {
     functions = functions.filter((func) =>
-      options.includeOnlyColorModes!.includes(func.colorMode)
-    )
+      options.includeOnlyColorModes!.includes(func.colorMode),
+    );
   }
 
   switch (options.sortBy) {
     case "complexity":
-      functions.sort((a, b) => a.complexity - b.complexity)
-      break
-    
+      functions.sort((a, b) => a.complexity - b.complexity);
+      break;
+
     case "speed":
-      functions.sort((a, b) => a.animationSpeed - b.animationSpeed)
-      break
-    
+      functions.sort((a, b) => a.animationSpeed - b.animationSpeed);
+      break;
+
     case "name":
-      functions.sort((a, b) => a.name.localeCompare(b.name))
-      break
-    
+      functions.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+
     case "random":
       for (let i = functions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1))
-        ;[functions[i], functions[j]] = [functions[j], functions[i]]
+        const j = Math.floor(Math.random() * (i + 1));
+        [functions[i], functions[j]] = [functions[j], functions[i]];
       }
 
-      break
+      break;
   }
 
   if (options.maxFunctions && options.maxFunctions > 0) {
-    functions = functions.slice(0, options.maxFunctions)
+    functions = functions.slice(0, options.maxFunctions);
   }
 
-  return functions
+  return functions;
 }
 
 /**
  * Validates a custom function against predefined function standards
  *
- * @description Checks if a custom function meets the same standards as 
+ * @description Checks if a custom function meets the same standards as
  * predefined functions useful for user-created functions or imports
  *
  * @param func - The function to validate
@@ -571,41 +574,41 @@ export function createFunctionPlaylist(
  * ```
  */
 export function validateFunction(func: Partial<TrigFunction>): {
-  isValid: boolean
-  errors: string[]
-  warnings: string[]
+  isValid: boolean;
+  errors: string[];
+  warnings: string[];
 } {
-  const errors: string[] = []
-  const warnings: string[] = []
+  const errors: string[] = [];
+  const warnings: string[] = [];
 
-  if (!func.id) errors.push("Function ID is required")
-  if (!func.name) errors.push("Function name is required")
-  if (!func.description) errors.push("Function description is required")
-  if (!func.xEquation) errors.push("X equation is required")
-  if (!func.yEquation) errors.push("Y equation is required")
-  if (!func.colorMode) errors.push("Color mode is required")
+  if (!func.id) errors.push("Function ID is required");
+  if (!func.name) errors.push("Function name is required");
+  if (!func.description) errors.push("Function description is required");
+  if (!func.xEquation) errors.push("X equation is required");
+  if (!func.yEquation) errors.push("Y equation is required");
+  if (!func.colorMode) errors.push("Color mode is required");
 
   if (func.animationSpeed !== undefined) {
     if (func.animationSpeed <= 0 || func.animationSpeed > 5) {
-      errors.push("Animation speed must be between 0 and 5")
+      errors.push("Animation speed must be between 0 and 5");
     }
   }
 
   if (func.complexity !== undefined) {
     if (func.complexity < 100 || func.complexity > 10000) {
-      warnings.push("Complexity should typically be between 100 and 10000")
+      warnings.push("Complexity should typically be between 100 and 10000");
     }
   }
 
   if (func.lineWidth !== undefined) {
     if (func.lineWidth < 0.5 || func.lineWidth > 5) {
-      warnings.push("Line width should typically be between 0.5 and 5")
+      warnings.push("Line width should typically be between 0.5 and 5");
     }
   }
 
   if (func.trailOpacity !== undefined) {
     if (func.trailOpacity < 0.8 || func.trailOpacity > 1) {
-      warnings.push("Trail opacity should typically be between 0.8 and 1")
+      warnings.push("Trail opacity should typically be between 0.8 and 1");
     }
   }
 
@@ -613,20 +616,20 @@ export function validateFunction(func: Partial<TrigFunction>): {
     func.id &&
     PREDEFINED_FUNCTIONS.some((existing) => existing.id === func.id)
   ) {
-    errors.push(`Function ID '${func.id}' already exists`)
+    errors.push(`Function ID '${func.id}' already exists`);
   }
 
   return {
     isValid: errors.length === 0,
     errors,
     warnings,
-  }
+  };
 }
 
 /**
  * Gets function statistics and metadata
  *
- * @description Returns comprehensive statistics about the predefined function 
+ * @description Returns comprehensive statistics about the predefined function
  * collection
  *
  * @returns Statistics object with counts and distributions
@@ -638,38 +641,41 @@ export function validateFunction(func: Partial<TrigFunction>): {
  * ```
  */
 export function getFunctionStatistics(): {
-  totalFunctions: number
-  colorModeDistribution: Record<ColorMode, number>
-  complexityRange: { min: number; max: number; average: number }
-  speedRange: { min: number; max: number; average: number }
-  averageLineWidth: number
-  averageTrailOpacity: number
+  totalFunctions: number;
+  colorModeDistribution: Record<ColorMode, number>;
+  complexityRange: { min: number; max: number; average: number };
+  speedRange: { min: number; max: number; average: number };
+  averageLineWidth: number;
+  averageTrailOpacity: number;
 } {
-  const functions = PREDEFINED_FUNCTIONS
-  const colorModeDistribution = functions.reduce((acc, func) => {
-    acc[func.colorMode] = (acc[func.colorMode] || 0) + 1
-    return acc
-  }, {} as Record<ColorMode, number>)
+  const functions = PREDEFINED_FUNCTIONS;
+  const colorModeDistribution = functions.reduce(
+    (acc, func) => {
+      acc[func.colorMode] = (acc[func.colorMode] || 0) + 1;
+      return acc;
+    },
+    {} as Record<ColorMode, number>,
+  );
 
-  const complexities = functions.map((func) => func.complexity)
+  const complexities = functions.map((func) => func.complexity);
   const complexityRange = {
     min: Math.min(...complexities),
     max: Math.max(...complexities),
     average: complexities.reduce((a, b) => a + b) / complexities.length,
-  }
+  };
 
-  const speeds = functions.map((func) => func.animationSpeed)
+  const speeds = functions.map((func) => func.animationSpeed);
   const speedRange = {
     min: Math.min(...speeds),
     max: Math.max(...speeds),
     average: speeds.reduce((a, b) => a + b) / speeds.length,
-  }
+  };
 
   const averageLineWidth =
-    functions.reduce((sum, func) => sum + func.lineWidth, 0) / functions.length
+    functions.reduce((sum, func) => sum + func.lineWidth, 0) / functions.length;
   const averageTrailOpacity =
     functions.reduce((sum, func) => sum + func.trailOpacity, 0) /
-    functions.length
+    functions.length;
 
   return {
     totalFunctions: functions.length,
@@ -678,5 +684,5 @@ export function getFunctionStatistics(): {
     speedRange,
     averageLineWidth,
     averageTrailOpacity,
-  }
+  };
 }
